@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><text y='1.2em' font-size='96'>⚫️</text></svg>">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    {% block stylesheets %}
+    <style>
+        /* Styles supplémentaires si nécessaire */
+    </style>
+    {% endblock %}
+    {% block javascripts %}
+    {% endblock %}
+</head>
+<body>
+    {% if not (app.request.attributes.get('_route') in ['app_login', 'app_register']) %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+            <div class="container-fluid d-flex justify-content-between">
+                <a class="navbar-brand text-white" href="{{ path('home') }}">Accueil</a>
+                {% if app.user %}
+                    <div>
+                        <span class="navbar-text text-white me-3">Bienvenue {{ app.user.prenom }}</span>
+                        <!-- Lien vers la liste des véhicules uniquement pour les utilisateurs non-admins -->
+                        {% if 'ROLE_ADMIN' not in app.user.roles %}
+                            <a class="nav-link d-inline text-white me-3" href="{{ path('app_search') }}">Liste des Véhicules</a>
+                        {% endif %}
+                        <!-- Lien vers le profil avec icône -->
+                        <a class="nav-link d-inline text-white me-3" href="{{ path('app_profile') }}">Profil</a>
+                        <!-- Lien vers le backoffice pour les admins -->
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            <a class="nav-link d-inline text-white me-3" href="{{ path('admin_dashboard') }}">BackOffice</a>
+                        {% endif %}
+                        <a class="nav-link d-inline text-white" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </div>
+                {% else %}
+                    <div>
+                        <a class="nav-link d-inline text-white me-3" href="{{ path('app_login') }}">Connexion</a>
+                        <a class="nav-link d-inline text-white" href="{{ path('app_search') }}">Liste des Véhicules Disponibles</a>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    {% endif %}
+    {% block body %}{% endblock %}
+</body>
+</html>

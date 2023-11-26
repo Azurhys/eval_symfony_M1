@@ -1,0 +1,88 @@
+{# templates/vehicule/ajouter.html.twig #}
+
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Ajouter un Véhicule{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    
+
+    .form-container .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-container .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-family: "Gill Sans", sans-serif;
+    }
+
+    .form-container .form-group input,
+    .form-container .form-group textarea,
+    .form-container .form-group select {
+        width: 96%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-container .form-group textarea {
+        resize: vertical;
+    }
+
+    
+</style>
+{% endblock %}
+
+{% block admin_content %}
+<div class="form-container">
+    <h1>Ajouter un Véhicule</h1>
+
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.titre, 'Titre du véhicule') }}
+            {{ form_widget(form.titre) }}
+            {{ form_errors(form.titre) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.marque, 'Marque') }}
+            {{ form_widget(form.marque) }}
+            {{ form_errors(form.marque) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.modele, 'Modèle') }}
+            {{ form_widget(form.modele) }}
+            {{ form_errors(form.modele) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description, 'Description') }}
+            {{ form_widget(form.description) }}
+            {{ form_errors(form.description) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.photo, 'Photo URL') }}
+            {{ form_widget(form.photo) }}
+            {{ form_errors(form.photo) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.prix_journalier, 'Prix Journalier') }}
+            {{ form_widget(form.prix_journalier) }}
+            {{ form_errors(form.prix_journalier) }}
+        </div>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

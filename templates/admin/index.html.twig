@@ -1,0 +1,43 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+    .admin-dashboard-content {
+        padding: 20px;
+        display: flex;
+    }
+
+    .dashboard-section {
+        margin-bottom: 20px;
+    }
+
+    .dashboard-banner {
+        padding: 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        color: white;
+    }
+
+    .dashboard-banner i {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    .dashboard-link {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    
+</style>
+{% endblock %}
+
+{% block admin_content %}
+
+{% endblock %}

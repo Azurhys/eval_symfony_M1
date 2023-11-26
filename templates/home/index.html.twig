@@ -1,0 +1,26 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="background">
+        <div class="flex-wrap">
+            <div>
+                <h1 class="title"> Bienvenue à Bord </h1>
+                <h3 class="sub-title">Location de voitures 24h/24 et 7j/7</h3>
+            </div>
+            <form class="search-form" action="{{ path('search') }}" method="get">
+                <div class="form-field">
+                    <label for="start_date">Début de Location:</label>
+                    <input type="date" name="start_date" required>
+                </div>
+                <div class="form-field">
+                    <label for="end_date">Fin de Location:</label>
+                    <input type="date" name="end_date" required>
+                </div>
+                <button class="search-button" type="submit">Rechercher un véhicule</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

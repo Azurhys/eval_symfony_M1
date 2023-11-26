@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background-color: #eaecef;
+        color: #333;
+    }
+
+    .container-profil {
+        width: 90%;
+        max-width: 1000px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .profile-header h1 {
+        margin: 0;
+    }
+
+    .btn-edit {
+        background-color: orange;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+
+    .profile-info, .profile-form, .reservations-section {
+        margin-bottom: 40px;
+    }
+
+    .profile-info ul, .reservations-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .profile-info li, .reservation-item {
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .reservation-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .reservation-img {
+        width: 170px;
+        height: 120px;
+        border-radius: 5px;
+        margin-right: 20px;
+        object-fit: cover;
+    }
+
+    .reservation-info {
+        flex-grow: 1;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="email"], select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-profil">
+    <div class="profile-header">
+        <h1>Profil de {{ user.prenom }}</h1>
+        <button id="btn-edit-profile" class="btn-edit">Modifier le Profil</button>
+    </div>
+
+    <div class="profile-info">
+        <ul>
+            <li><strong>Nom:</strong> {{ user.nom }}</li>
+            <li><strong>Prénom:</strong> {{ user.prenom }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Civilité:</strong> {{ user.civilite ? 'Femme' : 'Homme' }}</li>
+            <li><strong>Pseudo:</strong> {{ user.pseudo }}</li>
+        </ul>
+    </div>
+
+    <div id="edit-profile-form" class="profile-form" style="display: none;">
+        {{ form_start(form) }}
+        {% for field in form %}
+            <div class="form-group">
+                {{ form_label(field) }}
+                {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn-edit">Sauvegarder les modifications</button>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="reservations-section">
+        <h2>Vos Réservations</h2>
+        <ul>
+            {% for commande in commandes %}
+                <li class="reservation-item">
+                    <img src="{{ commande.vehicule.photo }}" alt="Photo de {{ commande.vehicule.titre }}" class="reservation-img">
+                    <div class="reservation-info">
+                        <strong>Réservation {{ commande.idCommande }}</strong> 
+                        <div>Dates: {{ commande.dateHeureDepart|date('d/m/Y') }} à {{ commande.dateHeureFin|date('d/m/Y') }}</div>
+                        <div>Prix total: {{ commande.prixTotal }} €</div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.getElementById('btn-edit-profile').addEventListener('click', function() {
+        document.getElementById('edit-profile-form').style.display = 'block';
+    });
+</script>
+{% endblock %}

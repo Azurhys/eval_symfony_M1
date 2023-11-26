@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #333;
+        line-height: 1.6;
+        padding: 40px 0;
+    }
+
+    .container-log {
+        max-width: 400px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: black;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: grid;
+        grid-gap: 15px;
+    }
+
+    label {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 12px 15px;
+        border: 1px solid #d1d3e2;
+        border-radius: 5px;
+        background: #fff;
+    }
+
+    .btn-primary {
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+ 
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Inscription</h1>
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.pseudo, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(registrationForm.mdp, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(registrationForm.civilite, {'attr': {'class': 'form-control'}}) }}
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}
